@@ -32,7 +32,7 @@ The web app built with Flask.
 
 The data is csv format as given, and the script for the ETL steps
 
-## model
+### model
 
 script to train and save a model. The saved model is bigger than 100MB, so not uploaded here.
 
