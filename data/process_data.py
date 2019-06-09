@@ -32,7 +32,7 @@ def load_data(messages_path='data/disaster_messages.csv', categories_path='data/
     messages_clean = messages.drop_duplicates(subset='id')
 
     # load categories dataset
-    categories = pd.read_csv('categories.csv')
+    categories = pd.read_csv(categories_path)
     
     #drop duplicates
     categories_clean = categories.drop_duplicates(subset='id')
@@ -115,9 +115,12 @@ def save_data(df, db_name):
     """
     
     #instantiate engine
-    engine = create_engine('sqlite:///'+db_name)
+    engine = create_engine('sqlite:///' + db_name)
+    
     #create sql table, replace existing table of same name
-    df.to_sql('messages', engine, index=False, if_exists='replace')
+    df.to_sql('DisasterMessages', con = engine, if_exists='replace')
+    
+    print("Engine: {}\n Table: {}".format(engine, 'DisasterMessages'))
     
 
 ########
@@ -142,7 +145,6 @@ def main():
     df = clean_data(df)
     
     save_data(df, db)
-    print("df saved to {}".format(db))
     
 
 if __name__ == '__main__':
