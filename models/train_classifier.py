@@ -168,6 +168,7 @@ def save_model(model, filepath):
     '''
     pickle.dump(model, open(filepath, "wb"))
     print("model saved as {}".format(filepath))
+
     
 
 ################
@@ -213,7 +214,7 @@ def main():
     
     model_evaluate(model, X_test, Y_test, categories)
     
-    save_model(model, path)
+    save_model(model, model_path)
     
 if __name__ == '__main__':
     main()
