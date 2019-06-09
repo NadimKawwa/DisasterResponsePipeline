@@ -126,7 +126,7 @@ def make_model():
         'tfidf__use_idf': [True, False],
         'clf__estimator__min_samples_split': [2, 3, 4]
                  }
-    cv = GridSearchCV(pipeline, parameters)
+    cv = GridSearchCV(pipeline, parameters, n_jobs=4)
     
     return cv
 
