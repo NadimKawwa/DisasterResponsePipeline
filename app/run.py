@@ -27,10 +27,10 @@ def tokenize(text):
 
 # load data
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
-df = pd.read_sql_table('Disas', engine)
+df = pd.read_sql_table('DisasterMessages', engine)
 
 # load model
-model = joblib.load("../models/trained_model.pkl")
+model = joblib.load("../models/saved_model.pickle")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -42,6 +42,10 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+    
+    #get top category names
+    top_category_names=df.iloc[:,5:].sum().sort_values(ascending=False)[1:10]
+    top_category_count=top_category_names.index.tolist()
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -68,7 +72,7 @@ def index():
         {
             'data': [
                 Bar(
-                    x=category_names,
+                    x=top_category_names,
                     y=top_category_count
                 )
             ],
